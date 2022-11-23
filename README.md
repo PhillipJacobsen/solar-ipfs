@@ -1,5 +1,3 @@
-# solar-ipfs
- 
 # CLI utility for uploading files to Pinata or Filebase.  After uploading files to IPFS, the CID can be recorded on the Solar blockchain using the unique IPFS transaction type.
 
 ## Installation
