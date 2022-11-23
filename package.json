@@ -1,0 +1,27 @@
+{
+  "name": "solar-ipfs",
+  "version": "1.0.0",
+  "description": "IPFS & Solar utility",
+  "main": "bin/index.js",
+  "bin": {
+    "solar-ipfs": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pj",
+  "license": "ISC",
+  "dependencies": {
+    "@arkecosystem/client": "^3.0.0",
+    "@pinata/sdk": "^1.1.26",
+    "@solar-network/crypto": "^3.3.0",
+    "aws-sdk": "^2.1260.0",
+    "chalk": "4.1.2",
+    "dotenv": "^16.0.1",
+    "ipfs-http-client": "^56.0.3",
+    "is-ipfs": "^6.0.2",
+    "yargs": "^17.5.1"
+  },
+  "nodeIP": "https://sxp.testnet.sh/api",
+  "network": "testnet"
+}
