@@ -212,7 +212,7 @@ async function connectRelay() {
                 type: "string"
             },
             memo: {
-                describe: "Message to include with transaction(optional)",
+                describe: "file name that contains optional memo text",
                 demandOption: false,
                 type: "string"
             },
@@ -248,12 +248,22 @@ async function connectRelay() {
             // Step 2: Create and Sign the transaction
             if ('memo' in argv) {
                 //console.log("Memo exists");
+                // Read the metadata JSON file and print its contents. 
+                const fs = require('fs')
+                const fileName = argv.memo;
+                const metadata = fs.readFileSync(fileName,
+                {encoding:'utf8', flag:'r'});             
+                
+                console.log(infoColor('reading ' + fileName));
+                console.log(infoColor(metadata));
+
                 transaction = Transactions.BuilderFactory.ipfs()
                     .nonce(senderNonce.toFixed())
                     .ipfsAsset(ipfsHash)
                     .fee(argv.fee)
-                    .memo(argv.memo)
+                    .memo(metadata)
                     .sign(passphrase);
+            
             } else {
                 // console.log("Memo does not exist");
                 transaction = Transactions.BuilderFactory.ipfs()

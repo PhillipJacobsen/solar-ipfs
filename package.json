@@ -14,7 +14,7 @@
   "dependencies": {
     "@arkecosystem/client": "^3.0.0",
     "@pinata/sdk": "^1.1.26",
-    "@solar-network/crypto": "^3.3.0",
+    "@solar-network/crypto": "^4.0.2",
     "aws-sdk": "^2.1260.0",
     "chalk": "4.1.2",
     "dotenv": "^16.0.1",

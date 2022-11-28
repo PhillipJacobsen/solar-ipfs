@@ -47,7 +47,7 @@ To get help on each command: `solar-ipfs <command> --help`
   --hash  IPFS Hash  
   --fee  Transaction fee amount  
   --passphrase  Your Private Passphrase(12 words)  
-  --memo  Message to include with transaction(optional)  
+  --memo  file name that contains optional memo text 
   
 ###  **solar-ipfs upload_pinata**
 **Description:** Upload file to IPFS Pinata account  
