@@ -11,17 +11,13 @@ const fs = require('fs');
 const util = require('util')
 require("dotenv").config();
 
-
-
-// import Solar and ARK SDK libraries
+// import Solar SDK libraries
 const Crypto = require("@solar-network/crypto");    // https://www.npmjs.com/package/@solar-network/crypto
-const Client = require("@arkecosystem/client");     // https://www.npmjs.com/package/@arkecosystem/client
+
 const Identities = Crypto.Identities;
 const Managers = Crypto.Managers;
 const Utils = Crypto.Utils;
 const Transactions = Crypto.Transactions;
-const Connection = Client.Connection;
-const client = new Connection(nodeIP);
 
 // import IPFS libraries
 const isIPFS = require("is-ipfs");   // used for verifying valid IPFS hash
@@ -45,6 +41,9 @@ const s3 = new AWS.S3({ endpoint: 'https://s3.filebase.com', signatureVersion: '
 
 async function connectRelay() {
     console.log(infoColor("Opening", network, "connection to relay:", nodeIP));
+
+    const {Connection} = await import ('../node_modules/@solar-network/client/dist/connection.js');  
+    const client = new Connection(nodeIP);
 
     Managers.configManager.setFromPreset(network);   //set the network (testnet or mainnet)
     try {
@@ -75,35 +74,6 @@ async function connectRelay() {
     yargs.updateStrings({
         "Commands:": chalk.green("Commands:")
     })
-
-
-
-    /* 
-     Command: Get Status of Relay node
-    */
-    yargs.command({
-        command: "relay",
-        describe: "Get status of relay node used for accessing blockchain",
-        async handler(argv) {
-            console.log(infoColor("Retrieving relay node status"));
-
-            if (await connectRelay()) {
-                try {
-                    const response = await client.api("node").status();
-                    console.log(resultColor("%s"), response.body.data);
-                } catch (err) {
-                    console.log(errorColor(err));
-                    console.log(errorColor("Cannot retrieve node status"))
-                }
-            } else {
-
-            }
-        }
-    }
-    )
-
-
-
 
 
     /* 
@@ -226,6 +196,9 @@ async function connectRelay() {
             const passphrase = argv.passphrase;
             const senderWalletAddress = Identities.Address.fromPassphrase(passphrase);
             const ipfsHash = argv.hash;
+
+            const {Connection} = await import ('../node_modules/@solar-network/client/dist/connection.js');  
+            const client = new Connection(nodeIP);
 
             // verify if Hash is valid
             if (!(isIPFS.cid(ipfsHash))) {
