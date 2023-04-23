@@ -62,7 +62,7 @@ async function connectRelay() {
 (async () => {
 
     // customize yargs 
-    yargs.scriptName("solar-cli")   // without this then --help shows filename [command] instead of app name
+    yargs.scriptName("solar-ipfs")   // without this then --help shows filename [command] instead of app name
         .demandCommand(1)           // require at least 1 command
         .strict()                   // show help menu when invalid command
 
